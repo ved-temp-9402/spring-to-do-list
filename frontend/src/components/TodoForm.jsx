@@ -19,6 +19,8 @@ export default function TodoForm({ onAddTodo }) {
       await onAddTodo(title.trim(), description.trim());
       setTitle('');
       setDescription('');
+    } catch {
+      // Keep form inputs on failure
     } finally {
       setSubmitting(false);
     }

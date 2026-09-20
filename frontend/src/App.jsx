@@ -34,6 +34,7 @@ export default function App() {
       setTodos((prev) => [newTodo, ...prev]);
     } catch (err) {
       setError(err.message);
+      throw err;
     }
   };
 
@@ -52,6 +53,7 @@ export default function App() {
       setTodos((prev) => prev.map((t) => (t.id === id ? updated : t)));
     } catch (err) {
       setError(err.message);
+      throw err;
     }
   };
 

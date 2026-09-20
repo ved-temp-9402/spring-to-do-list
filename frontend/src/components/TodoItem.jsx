@@ -8,8 +8,12 @@ export default function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
   const handleSaveEdit = async (e) => {
     e.preventDefault();
     if (!editTitle.trim()) return;
-    await onUpdate(todo.id, editTitle.trim(), editDescription.trim(), todo.completed);
-    setIsEditing(false);
+    try {
+      await onUpdate(todo.id, editTitle.trim(), editDescription.trim(), todo.completed);
+      setIsEditing(false);
+    } catch {
+      // Keep edit mode active on failure
+    }
   };
 
   const formattedDate = todo.createdAt
