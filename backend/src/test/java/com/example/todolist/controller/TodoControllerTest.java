@@ -97,4 +97,37 @@ class TodoControllerTest {
         mockMvc.perform(get("/api/todos/" + saved.getId()))
                 .andExpect(status().isNotFound());
     }
+
+    @Test
+    void shouldGetTodoById() throws Exception {
+        Todo saved = repository.save(new Todo(null, "Get by ID", "Desc", false, null));
+
+        mockMvc.perform(get("/api/todos/" + saved.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(saved.getId().intValue())))
+                .andExpect(jsonPath("$.title", is("Get by ID")));
+    }
+
+    @Test
+    void shouldUpdateTodo() throws Exception {
+        Todo saved = repository.save(new Todo(null, "Original", "Original Desc", false, null));
+        UpdateTodoRequest request = new UpdateTodoRequest("Updated", "Updated Desc", true);
+
+        mockMvc.perform(put("/api/todos/" + saved.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title", is("Updated")))
+                .andExpect(jsonPath("$.completed", is(true)));
+    }
+
+    @Test
+    void shouldReturn400WhenJsonIsMalformed() throws Exception {
+        mockMvc.perform(post("/api/todos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ malformed json "))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status", is(400)))
+                .andExpect(jsonPath("$.message", is("Malformed JSON request body")));
+    }
 }

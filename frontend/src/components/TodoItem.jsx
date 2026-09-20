@@ -46,7 +46,7 @@ export default function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
           />
           <div className="edit-actions">
             <button type="submit" className="btn-save">Save</button>
-            <button type="button" className="btn-cancel" onClick={() => setIsEditing(false)}>Cancel</button>
+            <button type="button" className="btn-cancel" onClick={() => { setIsEditing(false); setEditTitle(todo.title); setEditDescription(todo.description || ''); }}>Cancel</button>
           </div>
         </form>
       </li>
@@ -80,6 +80,7 @@ export default function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
           type="button"
           className="action-btn edit-btn"
           title="Edit Task"
+          aria-label="Edit task"
           onClick={() => setIsEditing(true)}
         >
           ✏️
@@ -88,6 +89,7 @@ export default function TodoItem({ todo, onToggle, onUpdate, onDelete }) {
           type="button"
           className="action-btn delete-btn"
           title="Delete Task"
+          aria-label="Delete task"
           onClick={() => onDelete(todo.id)}
         >
           🗑️

@@ -94,4 +94,11 @@ class TodoServiceTest {
         assertThatThrownBy(() -> service.getTodoById(created.getId()))
                 .isInstanceOf(ResourceNotFoundException.class);
     }
+
+    @Test
+    void shouldThrowWhenDeletingNonExistentTodo() {
+        assertThatThrownBy(() -> service.deleteTodo(999L))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessageContaining("Todo not found with id: 999");
+    }
 }

@@ -26,6 +26,14 @@ public class Todo {
         this.createdAt = createdAt != null ? createdAt : LocalDateTime.now();
     }
 
+    public Todo(Todo other) {
+        this.id = other.id;
+        this.title = other.title;
+        this.description = other.description;
+        this.completed = other.completed;
+        this.createdAt = other.createdAt;
+    }
+
     public Long getId() {
         return id;
     }
@@ -64,5 +72,33 @@ public class Todo {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Todo todo = (Todo) o;
+        return completed == todo.completed &&
+                java.util.Objects.equals(id, todo.id) &&
+                java.util.Objects.equals(title, todo.title) &&
+                java.util.Objects.equals(description, todo.description) &&
+                java.util.Objects.equals(createdAt, todo.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(id, title, description, completed, createdAt);
+    }
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", completed=" + completed +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

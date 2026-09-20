@@ -37,7 +37,10 @@ public class InMemoryTodoRepository implements TodoRepository {
 
     @Override
     public List<Todo> findAll() {
-        List<Todo> todos = new ArrayList<>(store.values());
+        List<Todo> todos = new ArrayList<>();
+        for (Todo t : store.values()) {
+            todos.add(new Todo(t));
+        }
         // Sort newest first
         todos.sort(Comparator.comparing(Todo::getCreatedAt, Comparator.nullsLast(Comparator.reverseOrder())));
         return todos;
@@ -45,7 +48,8 @@ public class InMemoryTodoRepository implements TodoRepository {
 
     @Override
     public Optional<Todo> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+        Todo todo = store.get(id);
+        return todo != null ? Optional.of(new Todo(todo)) : Optional.empty();
     }
 
     @Override
@@ -57,8 +61,9 @@ public class InMemoryTodoRepository implements TodoRepository {
         if (todo.getCreatedAt() == null) {
             todo.setCreatedAt(LocalDateTime.now());
         }
-        store.put(todo.getId(), todo);
-        return todo;
+        Todo copy = new Todo(todo);
+        store.put(copy.getId(), copy);
+        return new Todo(copy);
     }
 
     @Override

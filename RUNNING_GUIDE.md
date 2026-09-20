@@ -340,6 +340,7 @@ Content-Type: application/json
   "error": "Not Found",
   "message": "Todo not found with id: 999",
   "details": []
+  ,"timestamp": "2026-09-21T03:45:12.123"
 }
 ```
 
@@ -446,6 +447,7 @@ Content-Type: application/json
   "error": "Not Found",
   "message": "Todo not found with id: 999",
   "details": []
+  ,"timestamp": "2026-09-21T03:45:12.123"
 }
 ```
 
@@ -501,6 +503,7 @@ Content-Type: application/json
   "error": "Not Found",
   "message": "Todo not found with id: 999",
   "details": []
+  ,"timestamp": "2026-09-21T03:45:12.123"
 }
 ```
 

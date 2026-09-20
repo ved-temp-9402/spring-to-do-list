@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8080/api/todos';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api/todos';
 
 /**
  * Helper to handle fetch responses and parse error messages
