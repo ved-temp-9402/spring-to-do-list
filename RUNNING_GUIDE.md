@@ -148,7 +148,8 @@ For the best experience, ensure the following extensions are installed:
 
 1. Open the project root directory in VS Code:
    ```bash
-   code /home/vedansh/Developer/Vedansh/spring_to_do_list
+   code .
+   # or: code /path/to/spring_to_do_list
    ```
 2. In the VS Code File Explorer (left sidebar), navigate to:
    `backend/src/main/java/com/example/todolist/TodoListApplication.java`
@@ -390,7 +391,7 @@ Content-Type: application/json
   "error": "Bad Request",
   "message": "Validation failed for request body",
   "details": [
-    "title: Title is required"
+    "title: Title is required and cannot be blank"
   ]
 }
 ```
@@ -598,3 +599,4 @@ Any newly created or edited to-do items disappear after you stop and restart the
 - **Zero Configuration:** Eliminates the need to install, configure, or migrate an external database engine.
 - **Pure Architectural Focus:** Allows you to master Spring Boot's Controller-Service-Repository layers and Dependency Injection without database driver friction.
 - **Enterprise Extension:** In a production application, you would replace `InMemoryTodoRepository` with a Spring Data JPA interface extending `JpaRepository<Todo, Long>` connected to PostgreSQL or H2, without changing the `TodoService` or `TodoController` contracts!
+

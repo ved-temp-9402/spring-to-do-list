@@ -104,7 +104,7 @@ sequenceDiagram
         Validator-->>Controller: MethodArgumentNotValidException
         Controller-->>Tomcat: Propagate Exception
         Tomcat->>GlobalExceptionHandler: Intercept via @ExceptionHandler
-        GlobalExceptionHandler-->>API: HTTP 400 Bad Request {status: 400, details: ["title: Title is required"]}
+        GlobalExceptionHandler-->>API: HTTP 400 Bad Request {status: 400, details: ["title: Title is required and cannot be blank"]}
         API-->>React: Throw parsed Error message
         React-->>User: Display red error banner
     else Validation Passes
@@ -373,3 +373,4 @@ spring_to_do_list/
 For complete, step-by-step instructions on running both the backend and frontend in terminal and VS Code, running automated tests, testing with copy-paste `curl` commands, and troubleshooting ports or CORS, refer to the companion guide:
 
 👉 **[Complete Developer Running Guide (RUNNING_GUIDE.md)](RUNNING_GUIDE.md)**
+
